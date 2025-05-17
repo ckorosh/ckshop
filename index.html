@@ -12,9 +12,85 @@
       padding: 0;
       background-color: #0e1013;
       color: #fff;
+      transition: all 0.3s ease;
     }
+    
+    /* تم پیش‌فرض */
+    :root {
+      --primary-color: #3b82f6;
+      --primary-dark: #1f2937;
+      --primary-darker: #111827;
+      --primary-light: #374151;
+      --primary-lighter: #4b5563;
+      --accent-color: #3b82f6;
+      --text-color: #fff;
+      --text-light: #d1d5db;
+      --error-color: #ef4444;
+      --success-color: #10b981;
+    }
+    
+    /* تم سبز */
+    .theme-green {
+      --primary-color: #10b981;
+      --primary-dark: #064e3b;
+      --primary-darker: #022c22;
+      --primary-light: #047857;
+      --primary-lighter: #059669;
+      --accent-color: #10b981;
+    }
+    
+    /* تم آبی */
+    .theme-blue {
+      --primary-color: #3b82f6;
+      --primary-dark: #1e40af;
+      --primary-darker: #1e3a8a;
+      --primary-light: #2563eb;
+      --primary-lighter: #1d4ed8;
+      --accent-color: #3b82f6;
+    }
+    
+    /* تم قرمز */
+    .theme-red {
+      --primary-color: #ef4444;
+      --primary-dark: #7f1d1d;
+      --primary-darker: #450a0a;
+      --primary-light: #dc2626;
+      --primary-lighter: #b91c1c;
+      --accent-color: #ef4444;
+    }
+    
+    /* تم بنفش */
+    .theme-purple {
+      --primary-color: #8b5cf6;
+      --primary-dark: #5b21b6;
+      --primary-darker: #4c1d95;
+      --primary-light: #7c3aed;
+      --primary-lighter: #6d28d9;
+      --accent-color: #8b5cf6;
+    }
+    
+    /* تم مشکی */
+    .theme-dark {
+      --primary-color: #4b5563;
+      --primary-dark: #111827;
+      --primary-darker: #000000;
+      --primary-light: #1f2937;
+      --primary-lighter: #374151;
+      --accent-color: #4b5563;
+    }
+    
+    /* تم سورمه‌ای */
+    .theme-indigo {
+      --primary-color: #6366f1;
+      --primary-dark: #3730a3;
+      --primary-darker: #312e81;
+      --primary-light: #4f46e5;
+      --primary-lighter: #4338ca;
+      --accent-color: #6366f1;
+    }
+
     header {
-      background-color: #1f2937;
+      background-color: var(--primary-dark);
       padding: 20px;
       text-align: center;
       position: relative;
@@ -25,13 +101,15 @@
       border: none;
       border-radius: 5px;
       margin-top: 10px;
+      background-color: var(--primary-light);
+      color: var(--text-color);
     }
     #cart {
       position: absolute;
       left: 20px;
       top: 20px;
-      background: #374151;
-      color: #fff;
+      background: var(--primary-light);
+      color: var(--text-color);
       padding: 10px;
       border-radius: 8px;
       font-size: 14px;
@@ -41,8 +119,8 @@
       position: absolute;
       left: 150px;
       top: 20px;
-      background: #374151;
-      color: #fff;
+      background: var(--primary-light);
+      color: var(--text-color);
       padding: 10px;
       border-radius: 8px;
       font-size: 14px;
@@ -53,8 +131,8 @@
       position: absolute;
       left: 150px;
       top: 20px;
-      background: #374151;
-      color: #fff;
+      background: var(--primary-light);
+      color: var(--text-color);
       padding: 10px;
       border-radius: 8px;
       font-size: 14px;
@@ -62,7 +140,7 @@
       display: none;
     }
     nav {
-      background-color: #111827;
+      background-color: var(--primary-darker);
       box-shadow: 0 2px 5px rgba(0,0,0,0.1);
       padding: 15px;
       text-align: center;
@@ -72,13 +150,13 @@
       padding: 8px 14px;
       border: none;
       border-radius: 5px;
-      background-color: #374151;
-      color: white;
+      background-color: var(--primary-light);
+      color: var(--text-color);
       cursor: pointer;
       font-weight: bold;
     }
     nav button:hover {
-      background-color: #4b5563;
+      background-color: var(--primary-lighter);
     }
     section {
       display: flex;
@@ -87,8 +165,8 @@
       padding: 30px;
     }
     .product {
-      background-color: #1f2937;
-      border: 1px solid #374151;
+      background-color: var(--primary-dark);
+      border: 1px solid var(--primary-light);
       border-radius: 8px;
       width: 250px;
       margin: 15px;
@@ -107,11 +185,11 @@
       margin: 10px 0;
     }
     .product p {
-      color: #d1d5db;
+      color: var(--text-light);
       margin-bottom: 10px;
     }
     .product button {
-      background-color: #3b82f6;
+      background-color: var(--accent-color);
       color: white;
       border: none;
       padding: 8px 12px;
@@ -119,7 +197,7 @@
       cursor: pointer;
     }
     footer {
-      background-color: #111827;
+      background-color: var(--primary-darker);
       color: white;
       text-align: center;
       padding: 20px;
@@ -152,7 +230,7 @@
       background-color: rgba(0,0,0,0.7);
     }
     .modal-content {
-      background-color: #1f2937;
+      background-color: var(--primary-dark);
       margin: 5% auto;
       padding: 20px;
       border-radius: 8px;
@@ -177,33 +255,54 @@
       margin: 10px 0;
       border: none;
       border-radius: 5px;
-      background-color: #374151;
-      color: white;
+      background-color: var(--primary-light);
+      color: var(--text-color);
     }
     #auth-form button, #payment-form button {
       width: 100%;
       padding: 10px;
-      background-color: #3b82f6;
+      background-color: var(--accent-color);
       color: white;
       border: none;
       border-radius: 5px;
       cursor: pointer;
     }
     .error-message {
-      color: #ef4444;
+      color: var(--error-color);
       font-size: 14px;
       margin-top: 5px;
     }
     .success-message {
-      color: #10b981;
+      color: var(--success-color);
       font-size: 14px;
       margin-top: 5px;
     }
+    
+    /* استایل انتخابگر تم */
+    #theme-selector {
+      position: absolute;
+      right: 20px;
+      top: 20px;
+      background: var(--primary-light);
+      color: var(--text-color);
+      padding: 8px 12px;
+      border-radius: 8px;
+      font-size: 14px;
+      box-shadow: 0 0 5px rgba(0,0,0,0.3);
+      cursor: pointer;
+      border: none;
+    }
+    
+    #theme-selector option {
+      background: var(--primary-dark);
+      color: var(--text-color);
+    }
+    
     @media (max-width: 768px) {
       header input {
         width: 70%;
       }
-      #cart, #auth-btn, #user-info {
+      #cart, #auth-btn, #user-info, #theme-selector {
         position: static;
         display: block;
         margin: 10px auto;
@@ -243,14 +342,25 @@
     <h1>CK Shop - trust to ck company</h1>
     <p>فروش تخصصی اشتراک‌های دیجیتال و بازی‌ها</p>
     <input type="text" id="search" placeholder="جستجو در محصولات...">
+    
+    <select id="theme-selector" onchange="changeTheme(this.value)">
+      <option value="default">تم پیش‌فرض</option>
+      <option value="green">تم سبز</option>
+      <option value="blue">تم آبی</option>
+      <option value="red">تم قرمز</option>
+      <option value="purple">تم بنفش</option>
+      <option value="dark">تم مشکی</option>
+      <option value="indigo">تم سورمه‌ای</option>
+    </select>
+    
     <div id="auth-btn" onclick="showAuthModal()">ورود / عضویت</div>
     <div id="user-info">
       <span id="username-display"></span>
-      <button onclick="logout()" style="margin-right: 10px; background: #ef4444; color: white; border: none; padding: 3px 8px; border-radius: 5px; cursor: pointer; font-size: 12px;">خروج</button>
+      <button onclick="logout()" style="margin-right: 10px; background: var(--error-color); color: white; border: none; padding: 3px 8px; border-radius: 5px; cursor: pointer; font-size: 12px;">خروج</button>
     </div>
     <div id="cart">
       سبد خرید: <span id="cart-count">۰</span> مورد - مجموع: <span id="cart-total">۰</span> تومان
-      <button onclick="checkout()" style="margin-right: 10px; background: #3b82f6; color: white; border: none; padding: 5px 10px; border-radius: 5px; cursor: pointer;">پرداخت</button>
+      <button onclick="checkout()" style="margin-right: 10px; background: var(--accent-color); color: white; border: none; padding: 5px 10px; border-radius: 5px; cursor: pointer;">پرداخت</button>
     </div>
   </header>
 
@@ -371,6 +481,31 @@
     const authBtn = document.getElementById("auth-btn");
     const userInfo = document.getElementById("user-info");
     const usernameDisplay = document.getElementById("username-display");
+    const themeSelector = document.getElementById("theme-selector");
+
+    // تغییر تم
+    function changeTheme(theme) {
+      // حذف تمام کلاس‌های تم از body
+      document.body.classList.remove(
+        'theme-green', 'theme-blue', 'theme-red', 
+        'theme-purple', 'theme-dark', 'theme-indigo'
+      );
+      
+      // اضافه کردن تم انتخاب شده
+      if (theme !== 'default') {
+        document.body.classList.add(`theme-${theme}`);
+      }
+      
+      // ذخیره تم انتخاب شده
+      localStorage.setItem('ckShopTheme', theme);
+    }
+
+    // بارگذاری تم ذخیره شده
+    function loadTheme() {
+      const savedTheme = localStorage.getItem('ckShopTheme') || 'default';
+      themeSelector.value = savedTheme;
+      changeTheme(savedTheme);
+    }
 
     // سیستم کاربران
     function getUsers() {
@@ -602,6 +737,9 @@
 
     // رویدادهای صفحه
     document.addEventListener('DOMContentLoaded', function() {
+      // بارگذاری تم ذخیره شده
+      loadTheme();
+      
       // بررسی کاربر لاگین کرده
       currentUser = getCurrentUser();
       updateUserUI();
