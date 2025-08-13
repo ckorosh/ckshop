@@ -173,6 +173,7 @@
       padding: 15px;
       text-align: center;
       box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+      position: relative;
     }
     .product img {
       width: 100%;
@@ -298,6 +299,42 @@
       color: var(--text-color);
     }
     
+    /* استایل برچسب NEW */
+    .new-badge {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      background-color: #ff0000;
+      color: white;
+      padding: 4px 10px;
+      border-radius: 15px;
+      font-size: 12px;
+      font-weight: bold;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+      animation: pulse 1.5s infinite;
+      z-index: 10;
+    }
+    
+    /* استایل انیمیشن بازی‌ها */
+    .game-item {
+      animation: shake 0.8s infinite alternate;
+    }
+    
+    /* انیمیشن‌ها */
+    @keyframes pulse {
+      0% { transform: scale(1); opacity: 1; }
+      50% { transform: scale(1.1); opacity: 0.9; }
+      100% { transform: scale(1); opacity: 1; }
+    }
+    
+    @keyframes shake {
+      0% { transform: rotate(-2deg); }
+      25% { transform: rotate(2deg); }
+      50% { transform: rotate(-2deg); }
+      75% { transform: rotate(2deg); }
+      100% { transform: rotate(-2deg); }
+    }
+    
     @media (max-width: 768px) {
       header input {
         width: 70%;
@@ -399,6 +436,7 @@
     <button onclick="filterCategory('Spotify')">Spotify</button>
     <button onclick="filterCategory('Apple')">Apple Music</button>
     <button onclick="filterCategory('EA')">EA Play</button>
+    <button onclick="filterCategory('Telegram')">Telegram Premium</button>
     <button onclick="filterCategory('بازی')">بازی‌ها</button>
   </nav>
 
@@ -419,6 +457,13 @@
   <script>
     // داده‌های محصولات
     const products = [
+      // محصولات تلگرام
+      { name: 'Telegram Premium - 1 ماهه', price: 120000, category: 'Telegram' },
+      { name: 'Telegram Premium - 3 ماهه', price: 320000, category: 'Telegram' },
+      { name: 'Telegram Premium - 6 ماهه', price: 600000, category: 'Telegram' },
+      { name: 'Telegram Premium - 12 ماهه', price: 1100000, category: 'Telegram' },
+      
+      // بقیه محصولات
       { name: 'Game Pass Ultimate - 1 ماهه', price: 220000, category: 'Xbox' },
       { name: 'Game Pass Ultimate - 3 ماهه', price: 580000, category: 'Xbox' },
       { name: 'Game Pass Ultimate - 6 ماهه', price: 1100000, category: 'Xbox' },
@@ -449,6 +494,7 @@
     ];
 
     const productImages = {
+      "Telegram": "https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg",
       "Xbox": "https://assets.xboxservices.com/assets/dd/a1/dda1aa1d-99f2-470b-9773-710eabf849e0.jpg",
       "PlayStation": "https://image.api.playstation.com/vulcan/ap/rnd/202204/0810/803Pm8uJoZ2Cl9fJPvTaXHqG.png",
       "Netflix": "https://upload.wikimedia.org/wikipedia/commons/7/75/Netflix_icon.svg",
@@ -465,7 +511,7 @@
       "God of War: Ragnarok": "https://upload.wikimedia.org/wikipedia/en/e/ee/God_of_War_Ragnar%C3%B6k_cover.jpg",
       "Spider-Man 2 (PS5)": "https://i.etsystatic.com/35198957/r/il/39a9a9/5388247403/il_570xN.5388247403_lkuv.jpg",
       "Assassin's Creed Shadows": "https://assets-prd.ignimgs.com/2024/05/15/acshadows-1715789601294.jpg",
-      "The Crew Motorfest":"https://images.dwncdn.net/images/t_app-icon-l/p/52d35bf4-0eb2-4cd8-a2f7-ed910ac9e5e0/2845269090/the-crew-motorfest-logo",
+      "The Crew Motorfest":"https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcSvy4zKFk4fH7HL2B4Z0wlhT4OpOw6mbHjNfRbxco-Nzk3R1BIsAh9WoUDhxjcwihhrCRN3",
       "Need for Speed Heat": "https://store-images.s-microsoft.com/image/apps.26776.69435230515002378.477c7a96-5d17-45ec-95c2-a2739146b68d.b0d37a76-e4fa-495e-abac-6697ee4b5887",
       "Gotham Knights": "https://cdn.myportfolio.com/104baae407c3bf6924ab16701d4f9991/f076f5f4-0a36-407d-ac41-80d92936564a_rw_1920.jpg?h=e3d15d0c00c0a209fda76177efafa55f",
     };
@@ -549,7 +595,7 @@
       }
       
       if (password !== confirm) {
-        errorElement.textContent = "رمز عبور و تکرار آن مطابقت ندارند";
+        errorElement.textcontent = "رمز عبور و تکرار آن مطابقت ندارند";
         return;
       }
       
@@ -648,9 +694,17 @@
       list.forEach(p => {
         const card = document.createElement("div");
         card.className = "product";
+        
+        // اضافه کردن انیمیشن برای بازی‌ها
+        if (p.category === 'بازی') {
+          card.classList.add('game-item');
+        }
+        
         const img = productImages[p.name] || productImages[p.category] || '';
+        
         card.innerHTML = `
           <img src="${img}" alt="logo">
+          <span class="new-badge">NEW</span>
           <h3>${p.name}</h3>
           <p>قیمت: ${p.price.toLocaleString()} تومان</p>
           <button onclick="addToCart(${p.price})">افزودن به سبد</button>
