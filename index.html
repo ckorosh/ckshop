@@ -140,24 +140,80 @@
       display: none;
     }
     nav {
-      background-color: var(--primary-darker);
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-      padding: 15px;
-      text-align: center;
-    }
-    nav button {
-      margin: 8px;
-      padding: 8px 14px;
-      border: none;
-      border-radius: 5px;
-      background-color: var(--primary-light);
-      color: var(--text-color);
-      cursor: pointer;
-      font-weight: bold;
-    }
-    nav button:hover {
-      background-color: var(--primary-lighter);
-    }
+  background-color: var(--primary-darker);
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  padding: 15px;
+  text-align: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+}
+
+nav button {
+  padding: 8px 14px 8px 14px;
+  border: none;
+  border-radius: 5px;
+  background-color: var(--primary-light);
+  color: var(--text-color);
+  cursor: pointer;
+  font-weight: bold;
+  position: relative;
+  padding-right: 40px;
+  margin: 0;
+  flex-shrink: 0;
+}
+
+nav button:hover {
+  background-color: var(--primary-lighter);
+}
+
+nav button img {
+  width: 24px;
+  height: 24px;
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+@media (max-width: 768px) {
+  nav {
+    padding: 10px;
+    justify-content: flex-start;
+    overflow-x: auto;
+    white-space: nowrap;
+    flex-wrap: nowrap;
+  }
+  
+  nav button {
+    padding: 6px 10px 6px 10px;
+    padding-right: 30px;
+    font-size: 12px;
+    margin: 0;
+  }
+  
+  nav button img {
+    width: 18px;
+    height: 18px;
+    right: 5px;
+  }
+}
+
+@media (max-width: 768px) {
+  nav button {
+    padding: 6px 10px 6px 10px;
+    padding-right: 30px;
+    font-size: 12px;
+    margin: 4px;
+  }
+  nav button img {
+    width: 18px;
+    height: 18px;
+    right: 5px;
+  }
+}
     section {
       display: flex;
       flex-wrap: wrap;
@@ -354,9 +410,14 @@
         margin: 10px 0;
       }
       nav button {
-        padding: 6px 10px;
+        padding: 6px 10px 6px 30px;
         font-size: 12px;
         margin: 4px;
+      }
+      nav button img {
+        width: 18px;
+        height: 18px;
+        right: 5px;
       }
     }
     @media (max-width: 480px) {
@@ -427,19 +488,17 @@
       </form>
     </div>
   </div>
-
-  <nav>
-    <button onclick="filterCategory('همه')">همه</button>
-    <button onclick="filterCategory('Xbox')">Xbox Game Pass</button>
-    <button onclick="filterCategory('PlayStation')">PlayStation Plus</button>
-    <button onclick="filterCategory('Netflix')">Netflix</button>
-    <button onclick="filterCategory('Spotify')">Spotify</button>
-    <button onclick="filterCategory('Apple')">Apple Music</button>
-    <button onclick="filterCategory('EA')">EA Play</button>
-    <button onclick="filterCategory('Telegram')">Telegram Premium</button>
-    <button onclick="filterCategory('بازی')">بازی‌ها</button>
-  </nav>
-
+<nav>
+  <button onclick="filterCategory('همه')"><img src="https://cdn-icons-png.flaticon.com/512/60/60992.png" alt="All">همه</button>
+  <button onclick="filterCategory('Xbox')"><img src="https://upload.wikimedia.org/wikipedia/commons/f/f9/Xbox_one_logo.svg" alt="Xbox">Xbox</button>
+  <button onclick="filterCategory('PlayStation')"><img src="https://upload.wikimedia.org/wikipedia/commons/0/00/PlayStation_logo.svg" alt="PlayStation">PS Plus</button>
+  <button onclick="filterCategory('Netflix')"><img src="https://upload.wikimedia.org/wikipedia/commons/7/75/Netflix_icon.svg" alt="Netflix">Netflix</button>
+  <button onclick="filterCategory('Spotify')"><img src="https://upload.wikimedia.org/wikipedia/commons/1/19/Spotify_logo_without_text.svg" alt="Spotify">Spotify</button>
+  <button onclick="filterCategory('Apple')"><img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg" alt="Apple">Apple Music</button>
+  <button onclick="filterCategory('EA')"><img src="https://upload.wikimedia.org/wikipedia/commons/6/6f/EA_Sports_monochrome_logo.svg" alt="EA">EA Play</button>
+  <button onclick="filterCategory('Telegram')"><img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" alt="Telegram">Telegram</button>
+  <button onclick="filterCategory('بازی')"><img src="https://cdn-icons-png.flaticon.com/512/686/686589.png" alt="Games">بازی‌ها</button>
+</nav>
   <section id="products"></section>
 
   <footer>
