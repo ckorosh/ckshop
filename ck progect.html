@@ -140,24 +140,80 @@
       display: none;
     }
     nav {
-      background-color: var(--primary-darker);
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-      padding: 15px;
-      text-align: center;
-    }
-    nav button {
-      margin: 8px;
-      padding: 8px 14px;
-      border: none;
-      border-radius: 5px;
-      background-color: var(--primary-light);
-      color: var(--text-color);
-      cursor: pointer;
-      font-weight: bold;
-    }
-    nav button:hover {
-      background-color: var(--primary-lighter);
-    }
+  background-color: var(--primary-darker);
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  padding: 15px;
+  text-align: center;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+}
+
+nav button {
+  padding: 8px 14px 8px 14px;
+  border: none;
+  border-radius: 5px;
+  background-color: var(--primary-light);
+  color: var(--text-color);
+  cursor: pointer;
+  font-weight: bold;
+  position: relative;
+  padding-right: 40px;
+  margin: 0;
+  flex-shrink: 0;
+}
+
+nav button:hover {
+  background-color: var(--primary-lighter);
+}
+
+nav button img {
+  width: 24px;
+  height: 24px;
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+@media (max-width: 768px) {
+  nav {
+    padding: 10px;
+    justify-content: flex-start;
+    overflow-x: auto;
+    white-space: nowrap;
+    flex-wrap: nowrap;
+  }
+  
+  nav button {
+    padding: 6px 10px 6px 10px;
+    padding-right: 30px;
+    font-size: 12px;
+    margin: 0;
+  }
+  
+  nav button img {
+    width: 18px;
+    height: 18px;
+    right: 5px;
+  }
+}
+
+@media (max-width: 768px) {
+  nav button {
+    padding: 6px 10px 6px 10px;
+    padding-right: 30px;
+    font-size: 12px;
+    margin: 4px;
+  }
+  nav button img {
+    width: 18px;
+    height: 18px;
+    right: 5px;
+  }
+}
     section {
       display: flex;
       flex-wrap: wrap;
@@ -354,9 +410,14 @@
         margin: 10px 0;
       }
       nav button {
-        padding: 6px 10px;
+        padding: 6px 10px 6px 30px;
         font-size: 12px;
         margin: 4px;
+      }
+      nav button img {
+        width: 18px;
+        height: 18px;
+        right: 5px;
       }
     }
     @media (max-width: 480px) {
@@ -427,19 +488,17 @@
       </form>
     </div>
   </div>
-
-  <nav>
-    <button onclick="filterCategory('همه')">همه</button>
-    <button onclick="filterCategory('Xbox')">Xbox Game Pass</button>
-    <button onclick="filterCategory('PlayStation')">PlayStation Plus</button>
-    <button onclick="filterCategory('Netflix')">Netflix</button>
-    <button onclick="filterCategory('Spotify')">Spotify</button>
-    <button onclick="filterCategory('Apple')">Apple Music</button>
-    <button onclick="filterCategory('EA')">EA Play</button>
-    <button onclick="filterCategory('Telegram')">Telegram Premium</button>
-    <button onclick="filterCategory('بازی')">بازی‌ها</button>
-  </nav>
-
+<nav>
+  <button onclick="filterCategory('همه')"><img src="https://cdn-icons-png.flaticon.com/512/60/60992.png" alt="All">همه</button>
+  <button onclick="filterCategory('Xbox')"><img src="https://upload.wikimedia.org/wikipedia/commons/f/f9/Xbox_one_logo.svg" alt="Xbox">Xbox</button>
+  <button onclick="filterCategory('PlayStation')"><img src="https://upload.wikimedia.org/wikipedia/commons/0/00/PlayStation_logo.svg" alt="PlayStation">PS Plus</button>
+  <button onclick="filterCategory('Netflix')"><img src="https://upload.wikimedia.org/wikipedia/commons/7/75/Netflix_icon.svg" alt="Netflix">Netflix</button>
+  <button onclick="filterCategory('Spotify')"><img src="https://upload.wikimedia.org/wikipedia/commons/1/19/Spotify_logo_without_text.svg" alt="Spotify">Spotify</button>
+  <button onclick="filterCategory('Apple')"><img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg" alt="Apple">Apple Music</button>
+  <button onclick="filterCategory('EA')"><img src="https://upload.wikimedia.org/wikipedia/commons/6/6f/EA_Sports_monochrome_logo.svg" alt="EA">EA Play</button>
+  <button onclick="filterCategory('Telegram')"><img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" alt="Telegram">Telegram</button>
+  <button onclick="filterCategory('بازی')"><img src="https://cdn-icons-png.flaticon.com/512/686/686589.png" alt="Games">بازی‌ها</button>
+</nav>
   <section id="products"></section>
 
   <footer>
@@ -511,7 +570,7 @@
       "God of War: Ragnarok": "https://upload.wikimedia.org/wikipedia/en/e/ee/God_of_War_Ragnar%C3%B6k_cover.jpg",
       "Spider-Man 2 (PS5)": "https://i.etsystatic.com/35198957/r/il/39a9a9/5388247403/il_570xN.5388247403_lkuv.jpg",
       "Assassin's Creed Shadows": "https://assets-prd.ignimgs.com/2024/05/15/acshadows-1715789601294.jpg",
-      "The Crew Motorfest":"https://images.dwncdn.net/images/t/app-icon-l/p/52d35bf4-0eb2-4cd8-a2f7-ed910ac9e5e0/2845269090/the-crew-motorfest-logo",
+      "The Crew Motorfest":"https://encrypted-tbn1.gstatic.com/images?q=tbn:ANd9GcSvy4zKFk4fH7HL2B4Z0wlhT4OpOw6mbHjNfRbxco-Nzk3R1BIsAh9WoUDhxjcwihhrCRN3",
       "Need for Speed Heat": "https://store-images.s-microsoft.com/image/apps.26776.69435230515002378.477c7a96-5d17-45ec-95c2-a2739146b68d.b0d37a76-e4fa-495e-abac-6697ee4b5887",
       "Gotham Knights": "https://cdn.myportfolio.com/104baae407c3bf6924ab16701d4f9991/f076f5f4-0a36-407d-ac41-80d92936564a_rw_1920.jpg?h=e3d15d0c00c0a209fda76177efafa55f",
     };
