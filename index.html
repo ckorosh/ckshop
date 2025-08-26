@@ -139,81 +139,52 @@
       box-shadow: 0 0 5px rgba(0,0,0,0.3);
       display: none;
     }
+    
+    /* استایل‌های جدید برای ناوبری و دکمه‌ها */
     nav {
-  background-color: var(--primary-darker);
-  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-  padding: 15px;
-  text-align: center;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
-  gap: 8px;
-}
-
-nav button {
-  padding: 8px 14px 8px 14px;
-  border: none;
-  border-radius: 5px;
-  background-color: var(--primary-light);
-  color: var(--text-color);
-  cursor: pointer;
-  font-weight: bold;
-  position: relative;
-  padding-right: 40px;
-  margin: 0;
-  flex-shrink: 0;
-}
-
-nav button:hover {
-  background-color: var(--primary-lighter);
-}
-
-nav button img {
-  width: 24px;
-  height: 24px;
-  position: absolute;
-  right: 10px;
-  top: 50%;
-  transform: translateY(-50%);
-}
-
-@media (max-width: 768px) {
-  nav {
-    padding: 10px;
-    justify-content: flex-start;
-    overflow-x: auto;
-    white-space: nowrap;
-    flex-wrap: nowrap;
-  }
-  
-  nav button {
-    padding: 6px 10px 6px 10px;
-    padding-right: 30px;
-    font-size: 12px;
-    margin: 0;
-  }
-  
-  nav button img {
-    width: 18px;
-    height: 18px;
-    right: 5px;
-  }
-}
-
-@media (max-width: 768px) {
-  nav button {
-    padding: 6px 10px 6px 10px;
-    padding-right: 30px;
-    font-size: 12px;
-    margin: 4px;
-  }
-  nav button img {
-    width: 18px;
-    height: 18px;
-    right: 5px;
-  }
-}
+      background-color: var(--primary-darker);
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      padding: 15px;
+      text-align: center;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    nav button {
+      padding: 10px;
+      border: none;
+      border-radius: 8px;
+      background-color: var(--primary-light);
+      color: var(--text-color);
+      cursor: pointer;
+      font-weight: bold;
+      position: relative;
+      margin: 0;
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 44px;
+      min-height: 44px;
+    }
+    
+    nav button:hover {
+      background-color: var(--primary-lighter);
+    }
+    
+    nav button img {
+      width: 24px;
+      height: 24px;
+      object-fit: contain;
+    }
+    
+    nav button span {
+      display: none;
+    }
+    
     section {
       display: flex;
       flex-wrap: wrap;
@@ -409,17 +380,30 @@ nav button img {
         width: 100%;
         margin: 10px 0;
       }
-      nav button {
-        padding: 6px 10px 6px 30px;
-        font-size: 12px;
-        margin: 4px;
+      
+      /* استایل‌های موبایل برای ناوبری */
+      nav {
+        padding: 10px;
+        justify-content: flex-start;
+        overflow-x: auto;
+        white-space: nowrap;
+        flex-wrap: nowrap;
+        -webkit-overflow-scrolling: touch;
       }
+      
+      nav button {
+        padding: 10px;
+        font-size: 0;
+        min-width: 44px;
+        min-height: 44px;
+      }
+      
       nav button img {
-        width: 18px;
-        height: 18px;
-        right: 5px;
+        width: 20px;
+        height: 20px;
       }
     }
+    
     @media (max-width: 480px) {
       header h1 {
         font-size: 20px;
@@ -427,11 +411,17 @@ nav button img {
       header p {
         font-size: 14px;
       }
-      nav {
-        overflow-x: auto;
-        white-space: nowrap;
-        text-align: left;
-      }
+    }
+    
+    /* توضیح برای کاربر */
+    .filter-info {
+      text-align: center;
+      padding: 10px;
+      background: var(--primary-light);
+      margin: 10px auto;
+      border-radius: 5px;
+      max-width: 500px;
+      display: none;
     }
   </style>
 </head>
@@ -462,6 +452,22 @@ nav button img {
     </div>
   </header>
 
+  <div class="filter-info" id="filter-info">
+    برای مشاهده نام فیلترها، روی آیکون‌ها نگه دارید یا کلیک کنید
+  </div>
+
+  <nav>
+    <button onclick="filterCategory('همه')" title="همه محصولات"><img src="https://cdn-icons-png.flaticon.com/512/60/60992.png" alt="All"><span>همه</span></button>
+    <button onclick="filterCategory('Xbox')" title="Xbox Game Pass"><img src="https://upload.wikimedia.org/wikipedia/commons/f/f9/Xbox_one_logo.svg" alt="Xbox"><span>Xbox</span></button>
+    <button onclick="filterCategory('PlayStation')" title="PlayStation Plus"><img src="https://upload.wikimedia.org/wikipedia/commons/0/00/PlayStation_logo.svg" alt="PlayStation"><span>PS Plus</span></button>
+    <button onclick="filterCategory('Netflix')" title="Netflix"><img src="https://upload.wikimedia.org/wikipedia/commons/7/75/Netflix_icon.svg" alt="Netflix"><span>Netflix</span></button>
+    <button onclick="filterCategory('Spotify')" title="Spotify"><img src="https://upload.wikimedia.org/wikipedia/commons/1/19/Spotify_logo_without_text.svg" alt="Spotify"><span>Spotify</span></button>
+    <button onclick="filterCategory('Apple')" title="Apple Music"><img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg" alt="Apple"><span>Apple</span></button>
+    <button onclick="filterCategory('EA')" title="EA Play"><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0d/Electronic-Arts-Logo.svg/960px-Electronic-Arts-Logo.svg.png" alt="EA"><span>EA Play</span></button>
+    <button onclick="filterCategory('Telegram')" title="Telegram Premium"><img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" alt="Telegram"><span>Telegram</span></button>
+    <button onclick="filterCategory('بازی')" title="بازی‌ها"><img src="https://cdn-icons-png.flaticon.com/512/686/686589.png" alt="Games"><span>بازی‌ها</span></button>
+  </nav>
+
   <div id="auth-modal" class="modal">
     <div class="modal-content">
       <span class="close">&times;</span>
@@ -488,17 +494,7 @@ nav button img {
       </form>
     </div>
   </div>
-<nav>
-  <button onclick="filterCategory('همه')"><img src="https://cdn-icons-png.flaticon.com/512/60/60992.png" alt="All">همه</button>
-  <button onclick="filterCategory('Xbox')"><img src="https://upload.wikimedia.org/wikipedia/commons/f/f9/Xbox_one_logo.svg" alt="Xbox">Xbox</button>
-  <button onclick="filterCategory('PlayStation')"><img src="https://upload.wikimedia.org/wikipedia/commons/0/00/PlayStation_logo.svg" alt="PlayStation">PS Plus</button>
-  <button onclick="filterCategory('Netflix')"><img src="https://upload.wikimedia.org/wikipedia/commons/7/75/Netflix_icon.svg" alt="Netflix">Netflix</button>
-  <button onclick="filterCategory('Spotify')"><img src="https://upload.wikimedia.org/wikipedia/commons/1/19/Spotify_logo_without_text.svg" alt="Spotify">Spotify</button>
-  <button onclick="filterCategory('Apple')"><img src="https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg" alt="Apple">Apple Music</button>
-  <button onclick="filterCategory('EA')"><img src="https://upload.wikimedia.org/wikipedia/commons/6/6f/EA_Sports_monochrome_logo.svg" alt="EA">EA Play</button>
-  <button onclick="filterCategory('Telegram')"><img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Telegram_logo.svg" alt="Telegram">Telegram</button>
-  <button onclick="filterCategory('بازی')"><img src="https://cdn-icons-png.flaticon.com/512/686/686589.png" alt="Games">بازی‌ها</button>
-</nav>
+
   <section id="products"></section>
 
   <footer>
@@ -587,6 +583,7 @@ nav button img {
     const userInfo = document.getElementById("user-info");
     const usernameDisplay = document.getElementById("username-display");
     const themeSelector = document.getElementById("theme-selector");
+    const filterInfo = document.getElementById("filter-info");
 
     // تغییر تم
     function changeTheme(theme) {
@@ -792,6 +789,12 @@ nav button img {
         const filtered = products.filter(p => p.category === category);
         renderProducts(filtered);
       }
+      
+      // نمایش پیام راهنما
+      filterInfo.style.display = 'block';
+      setTimeout(() => {
+        filterInfo.style.display = 'none';
+      }, 3000);
     }
 
     function checkout() {
@@ -877,6 +880,14 @@ nav button img {
           modal.style.display = 'none';
         }
       };
+      
+      // نمایش راهنما برای فیلترها در موبایل
+      if (window.innerWidth <= 768) {
+        filterInfo.style.display = 'block';
+        setTimeout(() => {
+          filterInfo.style.display = 'none';
+        }, 5000);
+      }
     });
 
     // جستجوی محصولات
