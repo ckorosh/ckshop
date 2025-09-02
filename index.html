@@ -3,8 +3,18 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CK Shop - trust to ck company</title>
+  <title>CK Shop - ck store</title>
   <style>
+    /* تعریف متغیرهای RGB برای انیمیشن */
+    :root {
+      --rgb-primary: 59, 130, 246;
+      --rgb-secondary: 139, 92, 246;
+      --rgb-accent: 239, 68, 68;
+      --rgb-success: 16, 185, 129;
+      --rgb-warning: 245, 158, 11;
+      --rgb-info: 6, 182, 212;
+    }
+    
     body {
       font-family: Tahoma;
       direction: rtl;
@@ -13,6 +23,7 @@
       background-color: #0e1013;
       color: #fff;
       transition: all 0.3s ease;
+      overflow-x: hidden;
     }
     
     /* تم پیش‌فرض */
@@ -89,12 +100,49 @@
       --accent-color: #6366f1;
     }
 
+    /* افکت RGB پشت زمینه */
+    .rgb-background {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      opacity: 0.1;
+      background: linear-gradient(45deg, 
+        rgba(var(--rgb-primary), 0.5), 
+        rgba(var(--rgb-secondary), 0.5), 
+        rgba(var(--rgb-accent), 0.5));
+      background-size: 400% 400%;
+      animation: rgbBackground 15s ease infinite;
+    }
+
     header {
       background-color: var(--primary-dark);
       padding: 20px;
       text-align: center;
       position: relative;
+      z-index: 10;
+      border-bottom: 2px solid;
+      border-image: linear-gradient(90deg, 
+        rgba(var(--rgb-primary), 1), 
+        rgba(var(--rgb-secondary), 1), 
+        rgba(var(--rgb-accent), 1)) 1;
+      animation: headerGlow 3s infinite alternate;
     }
+    
+    @keyframes headerGlow {
+      0% {
+        box-shadow: 0 0 10px rgba(var(--rgb-primary), 0.5);
+      }
+      50% {
+        box-shadow: 0 0 20px rgba(var(--rgb-secondary), 0.7);
+      }
+      100% {
+        box-shadow: 0 0 15px rgba(var(--rgb-accent), 0.6);
+      }
+    }
+    
     header input {
       width: 40%;
       padding: 10px;
@@ -103,7 +151,14 @@
       margin-top: 10px;
       background-color: var(--primary-light);
       color: var(--text-color);
+      transition: all 0.3s ease;
     }
+    
+    header input:focus {
+      outline: none;
+      box-shadow: 0 0 10px rgba(var(--rgb-primary), 0.8);
+    }
+    
     #cart {
       position: absolute;
       left: 20px;
@@ -114,7 +169,10 @@
       border-radius: 8px;
       font-size: 14px;
       box-shadow: 0 0 5px rgba(0,0,0,0.3);
+      transition: all 0.3s ease;
+      animation: pulse 2s infinite;
     }
+    
     #auth-btn {
       position: absolute;
       left: 150px;
@@ -126,7 +184,16 @@
       font-size: 14px;
       box-shadow: 0 0 5px rgba(0,0,0,0.3);
       cursor: pointer;
+      transition: all 0.3s ease;
     }
+    
+    #auth-btn:hover {
+      background: linear-gradient(90deg, 
+        rgba(var(--rgb-primary), 0.8), 
+        rgba(var(--rgb-secondary), 0.8));
+      transform: translateY(-2px);
+    }
+    
     #user-info {
       position: absolute;
       left: 150px;
@@ -151,6 +218,8 @@
       justify-content: center;
       align-items: center;
       gap: 8px;
+      position: relative;
+      z-index: 10;
     }
     
     nav button {
@@ -169,16 +238,43 @@
       justify-content: center;
       min-width: 44px;
       min-height: 44px;
+      transition: all 0.3s ease;
+      overflow: hidden;
+    }
+    
+    nav button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, 
+        transparent, 
+        rgba(255, 255, 255, 0.2), 
+        transparent);
+      transition: all 0.5s ease;
+    }
+    
+    nav button:hover::before {
+      left: 100%;
     }
     
     nav button:hover {
       background-color: var(--primary-lighter);
+      transform: translateY(-3px);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
     }
     
     nav button img {
       width: 24px;
       height: 24px;
       object-fit: contain;
+      transition: all 0.3s ease;
+    }
+    
+    nav button:hover img {
+      transform: scale(1.2) rotate(5deg);
     }
     
     nav button span {
@@ -190,7 +286,10 @@
       flex-wrap: wrap;
       justify-content: center;
       padding: 30px;
+      position: relative;
+      z-index: 5;
     }
+    
     .product {
       background-color: var(--primary-dark);
       border: 1px solid var(--primary-light);
@@ -201,21 +300,61 @@
       text-align: center;
       box-shadow: 0 2px 5px rgba(0,0,0,0.2);
       position: relative;
+      transition: all 0.3s ease;
+      overflow: hidden;
     }
+    
+    .product::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: linear-gradient(45deg, 
+        rgba(var(--rgb-primary), 0.1), 
+        rgba(var(--rgb-secondary), 0.1), 
+        rgba(var(--rgb-accent), 0.1));
+      transform: rotate(45deg);
+      z-index: -1;
+      animation: productShine 3s infinite linear;
+    }
+    
+    .product:hover {
+      transform: translateY(-10px) scale(1.02);
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3), 
+                  0 0 20px rgba(var(--rgb-primary), 0.4);
+      border-color: rgba(var(--rgb-primary), 0.5);
+    }
+    
     .product img {
       width: 100%;
       height: 150px;
       object-fit: contain;
       margin-bottom: 10px;
+      transition: all 0.5s ease;
     }
+    
+    .product:hover img {
+      transform: scale(1.1) rotate(2deg);
+      filter: drop-shadow(0 0 8px rgba(var(--rgb-primary), 0.7));
+    }
+    
     .product h3 {
       font-size: 16px;
       margin: 10px 0;
+      transition: all 0.3s ease;
     }
+    
+    .product:hover h3 {
+      color: rgba(var(--rgb-primary), 1);
+    }
+    
     .product p {
       color: var(--text-light);
       margin-bottom: 10px;
     }
+    
     .product button {
       background-color: var(--accent-color);
       color: white;
@@ -223,30 +362,78 @@
       padding: 8px 12px;
       border-radius: 5px;
       cursor: pointer;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
     }
+    
+    .product button::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, 
+        transparent, 
+        rgba(255, 255, 255, 0.4), 
+        transparent);
+      transition: all 0.5s ease;
+    }
+    
+    .product button:hover::before {
+      left: 100%;
+    }
+    
+    .product button:hover {
+      background: linear-gradient(90deg, 
+        rgba(var(--rgb-primary), 1), 
+        rgba(var(--rgb-secondary), 1));
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    }
+    
     footer {
       background-color: var(--primary-darker);
       color: white;
       text-align: center;
       padding: 20px;
       margin-top: 30px;
+      position: relative;
+      z-index: 10;
+      border-top: 2px solid;
+      border-image: linear-gradient(90deg, 
+        rgba(var(--rgb-primary), 1), 
+        rgba(var(--rgb-secondary), 1), 
+        rgba(var(--rgb-accent), 1)) 1;
     }
+    
     .social-icons {
       margin-top: 15px;
     }
+    
     .social-icons a {
       margin: 0 10px;
       display: inline-block;
+      transition: all 0.3s ease;
     }
+    
+    .social-icons a:hover {
+      transform: translateY(-5px);
+    }
+    
     .social-icons img {
       width: 24px;
       height: 24px;
       vertical-align: middle;
       transition: transform 0.3s;
     }
+    
     .social-icons img:hover {
-      transform: scale(1.2);
+      transform: scale(1.5) rotate(10deg);
+      filter: drop-shadow(0 0 8px rgba(var(--rgb-primary), 0.8));
     }
+    
     .modal {
       display: none;
       position: fixed;
@@ -257,6 +444,7 @@
       height: 100%;
       background-color: rgba(0,0,0,0.7);
     }
+    
     .modal-content {
       background-color: var(--primary-dark);
       margin: 5% auto;
@@ -264,7 +452,14 @@
       border-radius: 8px;
       width: 50%;
       position: relative;
+      border: 2px solid;
+      border-image: linear-gradient(45deg, 
+        rgba(var(--rgb-primary), 1), 
+        rgba(var(--rgb-secondary), 1)) 1;
+      box-shadow: 0 0 30px rgba(var(--rgb-primary), 0.5);
+      animation: modalAppear 0.5s ease;
     }
+    
     .close {
       position: absolute;
       left: 15px;
@@ -273,10 +468,14 @@
       font-size: 28px;
       font-weight: bold;
       cursor: pointer;
+      transition: all 0.3s ease;
     }
+    
     .close:hover {
       color: white;
+      transform: rotate(90deg);
     }
+    
     #auth-form input, #payment-form input, #payment-form select {
       width: 100%;
       padding: 10px;
@@ -285,7 +484,14 @@
       border-radius: 5px;
       background-color: var(--primary-light);
       color: var(--text-color);
+      transition: all 0.3s ease;
     }
+    
+    #auth-form input:focus, #payment-form input:focus, #payment-form select:focus {
+      outline: none;
+      box-shadow: 0 0 10px rgba(var(--rgb-primary), 0.5);
+    }
+    
     #auth-form button, #payment-form button {
       width: 100%;
       padding: 10px;
@@ -294,16 +500,29 @@
       border: none;
       border-radius: 5px;
       cursor: pointer;
+      transition: all 0.3s ease;
     }
+    
+    #auth-form button:hover, #payment-form button:hover {
+      background: linear-gradient(90deg, 
+        rgba(var(--rgb-primary), 1), 
+        rgba(var(--rgb-secondary), 1));
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    }
+    
     .error-message {
       color: var(--error-color);
       font-size: 14px;
       margin-top: 5px;
+      animation: shake 0.5s ease;
     }
+    
     .success-message {
       color: var(--success-color);
       font-size: 14px;
       margin-top: 5px;
+      animation: fadeIn 0.5s ease;
     }
     
     /* استایل انتخابگر تم */
@@ -319,6 +538,11 @@
       box-shadow: 0 0 5px rgba(0,0,0,0.3);
       cursor: pointer;
       border: none;
+      transition: all 0.3s ease;
+    }
+    
+    #theme-selector:hover {
+      box-shadow: 0 0 10px rgba(var(--rgb-primary), 0.5);
     }
     
     #theme-selector option {
@@ -331,23 +555,96 @@
       position: absolute;
       top: 10px;
       right: 10px;
-      background-color: #ff0000;
+      background: linear-gradient(45deg, 
+        rgba(var(--rgb-primary), 1), 
+        rgba(var(--rgb-secondary), 1));
       color: white;
       padding: 4px 10px;
       border-radius: 15px;
       font-size: 12px;
       font-weight: bold;
       box-shadow: 0 2px 5px rgba(0,0,0,0.3);
-      animation: pulse 1.5s infinite;
+      animation: pulse 1.5s infinite, rgbText 3s infinite;
       z-index: 10;
     }
     
     /* استایل انیمیشن بازی‌ها */
     .game-item {
-      animation: shake 0.8s infinite alternate;
+      animation: shake 0.8s infinite alternate, rgbBorder 5s infinite;
     }
     
-    /* انیمیشن‌ها */
+    /* انیمیشن‌های جدید */
+    @keyframes rgbBackground {
+      0% {
+        background-position: 0% 50%;
+      }
+      50% {
+        background-position: 100% 50%;
+      }
+      100% {
+        background-position: 0% 50%;
+      }
+    }
+    
+    @keyframes rgbText {
+      0% {
+        color: rgba(var(--rgb-primary), 1);
+      }
+      33% {
+        color: rgba(var(--rgb-secondary), 1);
+      }
+      66% {
+        color: rgba(var(--rgb-accent), 1);
+      }
+      100% {
+        color: rgba(var(--rgb-primary), 1);
+      }
+    }
+    
+    @keyframes rgbBorder {
+      0% {
+        box-shadow: 0 0 10px rgba(var(--rgb-primary), 0.7);
+      }
+      33% {
+        box-shadow: 0 0 15px rgba(var(--rgb-secondary), 0.7);
+      }
+      66% {
+        box-shadow: 0 0 12px rgba(var(--rgb-accent), 0.7);
+      }
+      100% {
+        box-shadow: 0 0 10px rgba(var(--rgb-primary), 0.7);
+      }
+    }
+    
+    @keyframes productShine {
+      0% {
+        transform: rotate(45deg) translateY(-100%);
+      }
+      100% {
+        transform: rotate(45deg) translateY(100%);
+      }
+    }
+    
+    @keyframes modalAppear {
+      0% {
+        opacity: 0;
+        transform: translateY(-50px) scale(0.9);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+    
+    @keyframes fadeIn {
+      0% {
+        opacity: 0;
+      }
+      100% {
+        opacity: 1;
+      }
+    }
+    
     @keyframes pulse {
       0% { transform: scale(1); opacity: 1; }
       50% { transform: scale(1.1); opacity: 0.9; }
@@ -360,6 +657,41 @@
       50% { transform: rotate(-2deg); }
       75% { transform: rotate(2deg); }
       100% { transform: rotate(-2deg); }
+    }
+    
+    /* ذرات شناور RGB */
+    .particles {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: -1;
+    }
+    
+    .particle {
+      position: absolute;
+      border-radius: 50%;
+      opacity: 0.5;
+      animation: floatParticle 15s infinite linear;
+    }
+    
+    @keyframes floatParticle {
+      0% {
+        transform: translateY(0) translateX(0) rotate(0deg);
+        opacity: 0;
+      }
+      10% {
+        opacity: 0.5;
+      }
+      90% {
+        opacity: 0.3;
+      }
+      100% {
+        transform: translateY(-100vh) translateX(100vw) rotate(360deg);
+        opacity: 0;
+      }
     }
     
     @media (max-width: 768px) {
@@ -422,13 +754,24 @@
       border-radius: 5px;
       max-width: 500px;
       display: none;
+      animation: pulse 2s infinite;
     }
   </style>
 </head>
 <body>
+  <!-- ذرات شناور RGB -->
+  <div class="particles" id="particles"></div>
+  
+  <!-- افکت پس‌زمینه RGB -->
+  <div class="rgb-background"></div>
+
   <header>
-    <h1>CK Shop - trust to ck company</h1>
-    <p>فروش تخصصی اشتراک‌های دیجیتال و بازی‌ها</p>
+    <img src="https://cdn.iconscout.com/icon/free/png-256/free-calvin-klein-logo-icon-svg-png-download-2853830.png" alt="CK Logo" style="width: 115px; height: 100px; margin-left: 10px; border-radius: 8px;">
+    <div style="display: flex; align-items: center; justify-content: center;">
+      <div>
+        <p>trust to ck company - فروش تخصصی اشتراک‌های دیجیتال و بازی‌ها</p>
+      </div>
+    </div>
     <input type="text" id="search" placeholder="جستجو در محصولات...">
     
     <select id="theme-selector" onchange="changeTheme(this.value)">
@@ -585,6 +928,42 @@
     const themeSelector = document.getElementById("theme-selector");
     const filterInfo = document.getElementById("filter-info");
 
+    // ایجاد ذرات شناور RGB
+    function createParticles() {
+      const particlesContainer = document.getElementById('particles');
+      const colors = [
+        `rgba(${getComputedStyle(document.documentElement).getPropertyValue('--rgb-primary')}, 0.7)`,
+        `rgba(${getComputedStyle(document.documentElement).getPropertyValue('--rgb-secondary')}, 0.7)`,
+        `rgba(${getComputedStyle(document.documentElement).getPropertyValue('--rgb-accent')}, 0.7)`,
+        `rgba(${getComputedStyle(document.documentElement).getPropertyValue('--rgb-success')}, 0.7)`,
+        `rgba(${getComputedStyle(document.documentElement).getPropertyValue('--rgb-warning')}, 0.7)`,
+        `rgba(${getComputedStyle(document.documentElement).getPropertyValue('--rgb-info')}, 0.7)`
+      ];
+      
+      for (let i = 0; i < 30; i++) {
+        const particle = document.createElement('div');
+        particle.classList.add('particle');
+        
+        // اندازه تصادفی
+        const size = Math.random() * 15 + 5;
+        particle.style.width = `${size}px`;
+        particle.style.height = `${size}px`;
+        
+        // موقعیت تصادفی
+        particle.style.left = `${Math.random() * 100}vw`;
+        particle.style.top = `${Math.random() * 100}vh`;
+        
+        // رنگ تصادفی
+        particle.style.background = colors[Math.floor(Math.random() * colors.length)];
+        
+        // مدت زمان انیمیشن تصادفی
+        particle.style.animationDuration = `${Math.random() * 20 + 10}s`;
+        particle.style.animationDelay = `${Math.random() * 5}s`;
+        
+        particlesContainer.appendChild(particle);
+      }
+    }
+
     // تغییر تم
     function changeTheme(theme) {
       // حذف تمام کلاس‌های تم از body
@@ -600,6 +979,10 @@
       
       // ذخیره تم انتخاب شده
       localStorage.setItem('ckShopTheme', theme);
+      
+      // به روز رسانی ذرات برای تم جدید
+      document.getElementById('particles').innerHTML = '';
+      createParticles();
     }
 
     // بارگذاری تم ذخیره شده
@@ -649,9 +1032,8 @@
         errorElement.textContent = "لطفا تمام فیلدها را پر کنید";
         return;
       }
-      
       if (password !== confirm) {
-        errorElement.textcontent = "رمز عبور و تکرار آن مطابقت ندارند";
+        errorElement.textContent = "رمز عبور و تکرار آن مطابقت ندارند";
         return;
       }
       
@@ -751,25 +1133,32 @@
         const card = document.createElement("div");
         card.className = "product";
         
-        // اضافه کردن انیمیشن برای بازی‌ها
         if (p.category === 'بازی') {
           card.classList.add('game-item');
+        }
+        
+        // اضافه کردن افکت NEW برای محصولات جدید
+        if (Math.random() > 0.7) {
+          const newBadge = document.createElement('div');
+          newBadge.className = 'new-badge';
+          newBadge.textContent = 'NEW';
+          card.appendChild(newBadge);
         }
         
         const img = productImages[p.name] || productImages[p.category] || '';
         
         card.innerHTML = `
           <img src="${img}" alt="logo">
-          <span class="new-badge">NEW</span>
           <h3>${p.name}</h3>
-          <p>قیمت: ${p.price.toLocaleString()} تومان</p>
-          <button onclick="addToCart(${p.price})">افزودن به سبد</button>
+          <p>${p.price.toLocaleString()} تومان</p>
+          <button onclick="addToCart('${p.name}', ${p.price})">افزودن به سبد</button>
         `;
+        
         container.appendChild(card);
       });
     }
 
-    function addToCart(price) {
+    function addToCart(name, price) {
       if (!currentUser) {
         alert('لطفا ابتدا وارد حساب کاربری خود شوید');
         showAuthModal();
@@ -780,6 +1169,13 @@
       cartTotal += price;
       document.getElementById("cart-count").textContent = cartCount;
       document.getElementById("cart-total").textContent = cartTotal.toLocaleString();
+      
+      // افکت انیمیشن برای سبد خرید
+      const cart = document.getElementById("cart");
+      cart.style.transform = "scale(1.1)";
+      setTimeout(() => {
+        cart.style.transform = "scale(1)";
+      }, 300);
     }
 
     function filterCategory(category) {
@@ -853,6 +1249,9 @@
 
     // رویدادهای صفحه
     document.addEventListener('DOMContentLoaded', function() {
+      // ایجاد ذرات شناور
+      createParticles();
+      
       // بارگذاری تم ذخیره شده
       loadTheme();
       
